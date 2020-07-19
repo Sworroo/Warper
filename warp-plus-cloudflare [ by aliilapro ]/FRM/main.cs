@@ -136,7 +136,8 @@ namespace warp_plus_cloudflare___by_aliilapro__.FRM
                     while (enumerator.MoveNext())
                     {
                         string current = enumerator.Current;
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(this.mtd), current);
+                        Thread myThread = new Thread(new ParameterizedThreadStart(mtd));
+                        myThread.Start(current);
                         //mtd(current);
                     }
                 }
@@ -231,6 +232,7 @@ namespace warp_plus_cloudflare___by_aliilapro__.FRM
                 if(_test == ProxyList.Count -200)
                 {
                     MakeProxy();
+                    Start();
                 }
             }
         }
@@ -297,7 +299,9 @@ namespace warp_plus_cloudflare___by_aliilapro__.FRM
                     while (enumerator.MoveNext())
                     {
                         string current = enumerator.Current;
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(this.mtd), current);
+                        Thread myThread = new Thread(new ParameterizedThreadStart(mtd));
+                        myThread.Start(current);
+                        //ThreadPool.QueueUserWorkItem(new WaitCallback(this.mtd), current);
                         //mtd(current);
                     }
                 }
